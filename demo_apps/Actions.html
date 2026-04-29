@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Playwright Interaction Demo</title>
+ <style>
+   body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+   section { margin-bottom: 40px; }
+   label { display: block; margin-top: 10px; }
+   .dropzone {
+     width: 200px; height: 100px; border: 2px dashed #333;
+     display: flex; align-items: center; justify-content: center;
+     margin-top: 10px; background: #fafafa;
+   }
+   #item-to-be-dragged {
+     display: inline-block; padding: 10px; background: lightblue;
+     cursor: grab; margin-top: 10px;
+   }
+   #scrolling-container {
+     border: 1px solid #ccc; height: 100px; width: 200px;
+     overflow-y: scroll; margin-top: 10px;
+   }
+   #scrolling-container div { height: 40px; border-bottom: 1px solid #eee; }
+   footer { margin-top: 200px; font-weight: bold; }
+ </style>
+</head>
+<body>
+ <h1>Playwright Interaction Demo</h1>
+
+
+ <section>
+   <h2>Text Inputs</h2>
+   <label>Text: <input type="text" role="textbox" placeholder="Enter name"></label>
+   <label>Birth date: <input type="date" aria-label="Birth date"></label>
+   <label>Appointment time: <input type="time" aria-label="Appointment time"></label>
+   <label>Local time: <input type="datetime-local" aria-label="Local time"></label>
+   <label>Password: <input type="password" aria-label="Password"></label>
+   <textarea id="area" placeholder="Type here..."></textarea>
+ </section>
+
+
+ <section>
+   <h2>Checkboxes and Radios</h2>
+   <label><input type="checkbox" aria-label="I agree to the terms above"> I agree to the terms above</label>
+   <label><input type="checkbox" aria-label="Subscribe to newsletter"> Subscribe to newsletter</label>
+   <fieldset>
+     <legend>Choose size</legend>
+     <label><input type="radio" name="size" value="M"> M</label>
+     <label><input type="radio" name="size" value="L"> L</label>
+     <label><input type="radio" name="size" value="XL"> XL</label>
+   </fieldset>
+ </section>
+
+
+ <section>
+   <h2>Select Options</h2>
+   <label>Choose a color:
+     <select aria-label="Choose a color">
+       <option value="red">Red</option>
+       <option value="blue">Blue</option>
+       <option value="green">Green</option>
+     </select>
+   </label>
+   <label>Choose multiple colors:
+     <select aria-label="Choose multiple colors" multiple size="3">
+       <option value="red">Red</option>
+       <option value="blue">Blue</option>
+       <option value="green">Green</option>
+     </select>
+   </label>
+ </section>
+
+
+ <section>
+   <h2>Mouse Clicks</h2>
+   <button role="button">Generic Button</button>
+   <div id="item">Item (click/hover here)</div>
+ </section>
+
+
+ <section>
+   <h2>File Uploads</h2>
+   <label>Upload file: <input type="file" aria-label="Upload file"></label>
+   <label>Upload files: <input type="file" aria-label="Upload files" multiple></label>
+   <label>Upload directory: <input type="file" aria-label="Upload directory" webkitdirectory></label>
+ </section>
+
+
+ <section>
+   <h2>Drag and Drop</h2>
+   <div id="item-to-be-dragged" draggable="true">Drag me</div>
+   <div id="item-to-drop-at" class="dropzone">Drop here</div>
+ </section>
+
+
+ <section>
+   <h2>Scrolling</h2>
+   <div id="scrolling-container" data-testid="scrolling-container">
+     <div>Row 1</div>
+     <div>Row 2</div>
+     <div>Row 3</div>
+     <div>Row 4</div>
+     <div>Row 5</div>
+     <div>Row 6</div>
+     <div>Row 7</div>
+     <div>Row 8</div>
+   </div>
+   <footer>Footer text</footer>
+ </section>
+
+
+ <script>
+   // For drag-and-drop visualization
+   const dragged = document.getElementById('item-to-be-dragged');
+   const dropzone = document.getElementById('item-to-drop-at');
+   dragged.addEventListener('dragstart', (e) => {
+     e.dataTransfer.setData('text/plain', 'dragged');
+   });
+   dropzone.addEventListener('dragover', (e) => e.preventDefault());
+   dropzone.addEventListener('drop', (e) => {
+     e.preventDefault();
+     dropzone.textContent = 'Dropped!';
+     dropzone.style.background = '#d4edda';
+   });
+ </script>
+</body>
+</html>

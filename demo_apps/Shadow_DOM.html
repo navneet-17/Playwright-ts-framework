@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Playwright Shadow DOM Demo</title>
+</head>
+<body>
+  <h1>Playwright Shadow DOM Demo</h1>
+
+  <my-component></my-component>
+  <closed-component></closed-component>
+
+  <script>
+    // Open mode shadow DOM
+    class MyComponent extends HTMLElement {
+      constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'open' });
+        const div = document.createElement('div');
+        div.id = 'inner-details';
+        div.textContent = 'Details (Open Shadow)';
+        shadow.appendChild(div);
+      }
+    }
+    customElements.define('my-component', MyComponent);
+
+    // Closed mode shadow DOM
+    class ClosedComponent extends HTMLElement {
+      constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: 'closed' });
+        const div = document.createElement('div');
+        div.id = 'inner-details';
+        div.textContent = 'Details (Closed Shadow)';
+        shadow.appendChild(div);
+      }
+    }
+    customElements.define('closed-component', ClosedComponent);
+  </script>
+</body>
+</html>

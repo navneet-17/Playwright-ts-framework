@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Testing Demo</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+}
+/* Misaligned Elements */
+.misaligned {
+display: flex;
+justify-content: flex-start;
+margin-bottom: 30px;
+}
+.misaligned button {
+margin-left: 50px; /* intentional misalignment */
+}
+/* Overlapping Elements */
+.overlap-container {
+position: relative;
+width: 300px;
+height: 150px;
+margin-bottom: 30px;
+border: 1px solid #ccc;
+}
+.overlap-container img {
+position: absolute;
+top: 0;
+left: 0;
+width: 150px;
+}
+.overlap-container p {
+position: absolute;top: 50px;
+left: 100px;
+background: rgba(255, 255, 255, 0.8);
+}
+/* Truncated Text */
+.truncated {
+width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+border: 1px solid red;
+margin-bottom: 30px;
+}
+/* Partially Visible Element */
+.partial {
+width: 150%;
+background-color: lightblue;
+padding: 20px;
+margin-bottom: 30px;
+}
+/* Responsive Layout Issue */
+.responsive {
+display: flex;
+gap: 20px;
+margin-bottom: 30px;
+}
+.responsive div {
+background: #f5a623;
+flex: 1;
+padding: 20px;
+}
+/* Broken Image */
+.broken img {
+width: 150px;
+height: 100px;
+object-fit: cover;
+}
+/* Button clickable issue */
+.clickable {position: relative;
+width: 200px;
+height: 50px;
+margin-bottom: 30px;
+}
+.clickable button {
+position: absolute;
+top: 20px; /* misaligned clickable area */
+left: 50px;
+}
+/* Invisible content */
+.invisible {
+opacity: 0;
+margin-bottom: 30px;
+}
+/* Spacing / padding issue */
+.spacing {
+margin-bottom: 5px;
+padding: 2px;
+background-color: #eee;
+}
+/* Wrong font / color contrast */
+.wrong-font {
+font-size: 8px;
+color: #eee;
+background-color: #fff;
+padding: 10px;
+margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+<h1>Visual Testing Demo Page</h1>
+<h2>1. Misaligned Elements</h2>
+<div class="misaligned">
+<button>Button 1</button>
+<button>Button 2</button>
+</div>
+<h2>2. Overlapping Elements</h2><div class="overlap-container">
+<img src="https://via.placeholder.com/150" alt="Image">
+<p>Text overlapping image</p>
+</div>
+<h2>3. Truncated Text</h2>
+<div class="truncated">This is a very long text that should be truncated with
+ellipsis...</div>
+<h2>4. Partially Visible Element</h2>
+<div class="partial">This container is wider than the viewport, partially hidden
+on the right.</div>
+<h2>5. Responsive Layout Issue</h2>
+<div class="responsive">
+<div>Column 1</div>
+<div>Column 2</div>
+<div>Column 3</div>
+</div>
+<h2>6. Broken Image</h2>
+<div class="broken">
+<img src="https://brokenlink.com/image.png" alt="Broken Image">
+</div>
+<h2>7. Button / Clickable Issue</h2>
+<div class="clickable">
+<button>Click Me</button>
+</div>
+<h2>8. Invisible / Hidden Content</h2>
+<div class="invisible">You can't see me, but I'm here!</div>
+<h2>9. Spacing / Padding Issue</h2>
+<div class="spacing">Element too cramped</div>  
+<div class="spacing">Another cramped element</div>
+<h2>10. Wrong Font / Color Contrast</h2>
+<div class="wrong-font">Unreadable text due to poor color and font size</div>
+</body>
+</html>

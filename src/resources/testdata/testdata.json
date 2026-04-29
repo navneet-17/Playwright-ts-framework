@@ -1,0 +1,14 @@
+{
+    "loginData" : [
+        { "username": "standard_user", "password": "secret_sauce" },
+        { "username": "locked_out_user", "password": "secret_sauce" },
+        { "username": "invalid_user", "password": "wrong_pass" }
+    ],
+    "base_url" : "https://playwright.dev",
+    "user": {
+        "name" : "Navneet",
+        "age" : 35,
+        "role" : "SDET"
+    },
+    "ids" : [101, 102, 103]    
+}

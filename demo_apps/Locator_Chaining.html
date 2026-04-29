@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>Locator Chaining Demo</title>
+ <style>
+   body { font-family: Arial, sans-serif; padding: 20px; }
+   form { border: 1px solid #ccc; padding: 15px; max-width: 300px; margin-bottom: 20px; }
+   iframe { border: 1px solid #888; margin-top: 20px; }
+ </style>
+</head>
+<body>
+ <h1>Locator Chaining Demo</h1>
+
+
+ <!-- Iframe with another form -->
+ <iframe id="loginFrame" srcdoc="
+   <!DOCTYPE html>
+   <html lang='en'>
+   <body>
+     <form aria-label='Frame Login Form'>
+       <label for='frameUsername'>Username</label>
+       <input id='frameUsername' type='text'><br><br>
+
+
+       <label for='framePassword'>Password</label>
+       <input id='framePassword' type='password'><br><br>
+
+
+       <button type='submit'>Login</button>
+     </form>
+   </body>
+   </html>
+ " width="350" height="200"></iframe>
+
+
+</body>
+</html>
+
+
+=============
+
+
+<!-- demo.html -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Playwright Test ID Demo</title>
+</head>
+<body>
+ <button pw-test-id="login-button">Login</button>
+</body>
+</html> -->

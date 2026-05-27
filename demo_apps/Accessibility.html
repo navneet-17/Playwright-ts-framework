@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <title>A11y Demo - Playwright</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <style>
+   body { font-family: system-ui, sans-serif; line-height: 1.5; }
+   .skip-link {
+     position: absolute; left: -999px; top: -999px;
+   }
+   .skip-link:focus {
+     left: 8px; top: 8px; padding: 8px; background: #eee;
+   }
+   /* BAD: low contrast */
+   .low-contrast { color: #9a9a9a; background: #fff; }
+   .custom-select { border: 1px solid #ccc; padding: 8px; width: 240px; margin: 12px 0; }
+   .custom-select [role="option"][aria-selected="true"] { outline: 2px solid; }
+   #carousel { margin: 12px 0; height: 60px; overflow: hidden; border: 1px dashed #999; }
+   .slide { display: none; padding: 8px; }
+   .slide[aria-hidden="false"] { display: block; }
+   #modal[hidden] { display: none; }
+   .modal-content { background: white; padding: 16px; border: 2px solid; max-width: 360px; }
+   .sr-only {
+     position: absolute !important;
+     height: 1px; width: 1px;
+     overflow: hidden;
+     clip: rect(1px,1px,1px,1px);
+     white-space: nowrap;
+   }
+ </style>
+</head>
+<body>
+ <!-- Skip link (good) -->
+ <a class="skip-link" href="#main">Skip to main content</a>
+
+
+ <!-- Page landmarks -->
+ <header role="banner">
+   <h1 id="site-title">A11y Demo App</h1>
+   <nav aria-label="Main navigation">
+     <ul>
+       <li><a href="#main">Home</a></li>
+       <li><a href="#features">Features (bad contrast)</a></li>
+       <li><a href="#contact">Contact form (labels?)</a></li>
+       <!-- Link opens new tab without rel (bad) -->
+       <li><a href="https://example.com" target="_blank">External (no rel)</a></li>
+     </ul>
+   </nav>
+   
+ </header>
+
+
+ <!-- Decorative + non-decorative images -->
+ <section aria-labelledby="hero-heading">
+   <h2 id="hero-heading">Hero</h2>
+   <!-- good decorative -->
+   <img src="https://via.placeholder.com/600x100" alt="" aria-hidden="true" />
+   <!-- missing alt (bad) -->
+   <img src="https://via.placeholder.com/120x60" />
+ </section>
+
+
+ <!-- Headings out of order (bad) -->
+ <h4>Out-of-order heading</h4>
+
+
+ <main id="main" role="main" tabindex="-1">
+   <section id="features" aria-labelledby="features-h2">
+     <h2 id="features-h2">Features</h2>
+
+
+     <!-- Low contrast text -->
+     <p class="low-contrast">This paragraph has poor color contrast.</p>
+
+
+     <!-- Accordion (good) -->
+     <div class="accordion">
+       <button aria-expanded="false" aria-controls="acc-panel-1" id="acc-btn-1">
+         What is accessibility?
+       </button>
+       <div id="acc-panel-1" role="region" aria-labelledby="acc-btn-1" hidden>
+         Accessibility means inclusive experiences for all users.
+       </div>
+     </div>
+
+
+     <!-- Custom select -->
+     <div class="custom-select" role="listbox" aria-labelledby="fruit-label" tabindex="0">
+       <span id="fruit-label">Favorite fruit (custom)</span>
+       <div role="option" aria-selected="true">Apple</div>
+       <div role="option">Banana</div>
+       <div role="option">Mango</div>
+     </div>
+
+
+     <!-- Carousel -->
+     <div id="carousel" aria-roledescription="carousel" aria-label="Rotating promos">
+       <div class="slide" aria-hidden="false">Slide 1</div>
+       <div class="slide" aria-hidden="true">Slide 2</div>
+       <div class="slide" aria-hidden="true">Slide 3</div>
+     </div>
+
+
+     <!-- Table missing scope -->
+     <table id="price-table" border="1">
+       <caption>Pricing</caption>
+       <tr><th>Plan</th><th>Price</th></tr>
+       <tr><td>Basic</td><td>$10</td></tr>
+       <tr><td>Pro</td><td>$20</td></tr>
+     </table>
+
+
+     <!-- Iframe without title (bad) -->
+     <iframe src="https://example.com" width="300" height="100"></iframe>
+
+
+     <!-- Video without captions (bad) -->
+     <video id="promo-video" controls width="320">
+       <source src="" type="video/mp4" />
+       Sorry, your browser doesn't support embedded videos.
+     </video>
+
+
+     <!-- Button without accessible name (bad) -->
+     <button id="icon-only"><span class="icon-star" aria-hidden="true">★</span></button>
+
+
+     <!-- Duplicate IDs -->
+     <div id="dup">First duplicate id</div>
+     <div id="dup">Second duplicate id</div>
+
+
+     <!-- Live region -->
+     <div aria-live="polite" id="live-region" class="sr-only"></div>
+
+
+     <!-- Modal -->
+     <button id="open-modal">Open Modal</button>
+     <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+       <div class="modal-content" tabindex="-1">
+         <h2 id="modal-title">Subscribe</h2>
+         <label for="email">Email</label>
+         <input id="email" type="email" />
+         <button id="subscribe">Subscribe</button>
+         <button id="close-modal">Close</button>
+       </div>
+     </div>
+
+
+     <!-- Contact form -->
+     <section id="contact" aria-labelledby="contact-h2">
+       <h2 id="contact-h2">Contact</h2>
+       <form>
+         <div>
+           <label for="name">Name</label>
+           <input id="name" type="text" />
+         </div>
+         <div>
+           <!-- missing label -->
+           <input id="phone" type="tel" placeholder="Phone (no label)" />
+         </div>
+         <div>
+           <label for="msg">Message</label>
+           <textarea id="msg"></textarea>
+         </div>
+         <button type="submit">Send</button>
+       </form>
+     </section>
+   </section>
+ </main>
+
+
+ <footer role="contentinfo">
+   <p>(c) Demo</p>
+ </footer>
+</body>
+</html>

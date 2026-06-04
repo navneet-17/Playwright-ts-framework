@@ -11,9 +11,9 @@ test.describe('Login Tests with Data Provider', () => {
   for (const data of loginData1) {
     test(`Login test - ${data.username} using data provider format` , async ({ page }) => {
       await page.goto('https://www.saucedemo.com');
-      await page.fill('#user-name', data.username);
-      await page.fill('#password', data.password);
-      await page.click('#login-button');
+      await page.fill('[data-test="username"]', data.username);
+      await page.fill('[data-test="password"]', data.password);
+      await page.click('[data-test="login-button"]');
     //   await expect(page.locator('#welcome')).toContainText('Welcome');
     });
   }
@@ -26,9 +26,9 @@ test.describe('Login Tests with test data json', () => {
   for (const data of loginData) {
     test(`Login test - ${data.username}`, async ({ page }) => {
       await page.goto('https://www.saucedemo.com');
-      await page.fill('#user-name', data.username);
-      await page.fill('#password', data.password);
-      await page.click('#login-button');
+      await page.fill('[data-test="username"]', data.username);
+      await page.fill('[data-test="password"]', data.password);
+      await page.click('[data-test="login-button"]');
     //   await expect(page.locator('#welcome')).toContainText('Welcome');
     });
   }

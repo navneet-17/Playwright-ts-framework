@@ -25,8 +25,9 @@ export default defineConfig({
   snapshotPathTemplate: 'src/screenshots/{testFileName}/{arg}-{projectName}-{platform}{ext}',
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
     reporter: [
-    ['html'],
-    ['allure-playwright']
+    ['list'], // List reporter
+    ['html'], // HTMl report
+    ['allure-playwright'] // Allure report
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -43,7 +44,7 @@ export default defineConfig({
     video: 'on-first-retry',
 
     // Run tests in headless / non UI mode!
-    headless: false,
+    headless: true,
   },
 
   /* Configure projects for major browsers */

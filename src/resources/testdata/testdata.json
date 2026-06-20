@@ -10,5 +10,14 @@
         "age" : 35,
         "role" : "SDET"
     },
-    "ids" : [101, 102, 103]    
+    "ids" : [101, 102, 103],    
+    "api_test_data" : {
+        "endpoint": "https://reqres.in/api/users",
+        "create_user_payload": {               
+            "username": "navneet_shree",
+            "email": "navneet.shree@reqres.in",
+            "password": "nav_password"
+        },        
+        "update_user_email": "navneet_shree@reqres.in"
+    }    
 }

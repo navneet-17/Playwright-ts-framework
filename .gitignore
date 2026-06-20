@@ -10,3 +10,6 @@ playwright/.cache/
 /playwright/.auth/
 test-results/
 .vscode/
+.env
+.env.local
+.env.*.local

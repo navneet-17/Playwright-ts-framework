@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { CustomLogger } from '../loggers/CustomLogger';
-const logger = new CustomLogger();
+const logger = CustomLogger.getInstance();
 test('Verify the Logger implemented manually', async({page}) =>{
   logger.info ('Navigating to the login page')
   await page.goto('https://www.saucedemo.com/v1/');

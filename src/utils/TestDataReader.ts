@@ -22,6 +22,8 @@ function loadTestData(): Record<string, any>{ // ← return type: never null
 // Private: key validation — throws if key missing (never returns false)
 function validateTestDataKey(key: string, testData:  Record<string , any>){
   if (!(key in testData)){
+    console.error(`❌ Key not found: "${key}"`);
+    console.trace();  // ← Shows full call stack
     throw new Error(`Key "${key}" not found in test data`);
   }
 }
@@ -34,26 +36,27 @@ export function getTestData(key: string): any {
  }
 
 // Returns a JSON array — throws if value is not an array
-export function getJsonArray(key: string): any[]{
+export function getJsonArray<T>(key: string): T[]{
   const testData = loadTestData();
   validateTestDataKey(key, testData);
   
   const value = testData[key];
+
   if(!Array.isArray(value)){
     throw new Error(`Key "${key}" does not contain a JSON array!`)    
   }
-  return value;  
+  return value as T[];  
 }
 
 // Returns a JSON object — throws if value is an array or non-object
-export function getJsonObject(key: string): Record <string , any>{
+export function getJsonObject<T>(key: string): T{
   const testData = loadTestData();
   validateTestDataKey(key, testData); 
   
   const value = testData[key];
   // typeof [] === 'object' — so must explicitly exclude arrays
-  if(typeof(value) != 'object' || Array.isArray(value)){
+  if(value === null  || typeof(value) !== 'object' || Array.isArray(value)){
     throw new Error(`Key "${key}" does not contain a JSON Object!`)
   }  
-  return value;
+  return value as T;
 }

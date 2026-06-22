@@ -1,23 +1,85 @@
 {
-    "loginData" : [
-        { "username": "standard_user", "password": "secret_sauce" },
-        { "username": "locked_out_user", "password": "secret_sauce" },
-        { "username": "invalid_user", "password": "wrong_pass" }
+    "loginData": [
+        {
+            "username": "standard_user",
+            "password": "secret_sauce"
+        },
+        {
+            "username": "locked_out_user",
+            "password": "secret_sauce"
+        },
+        {
+            "username": "invalid_user",
+            "password": "wrong_pass"
+        }
     ],
-    "base_url" : "https://playwright.dev",
+    "base_url": "https://playwright.dev",
     "user": {
-        "name" : "Navneet",
-        "age" : 35,
-        "role" : "SDET"
+        "name": "Navneet",
+        "age": 35,
+        "role": "SDET"
     },
-    "ids" : [101, 102, 103],    
-    "api_test_data" : {
+    "ids": [
+        101,
+        102,
+        103
+    ],
+    "api_test_data": {
         "endpoint": "https://reqres.in/api/users",
-        "create_user_payload": {               
+        "create_user_payload": {
             "username": "navneet_shree",
             "email": "navneet.shree@reqres.in",
             "password": "nav_password"
-        },        
+        },
         "update_user_email": "navneet_shree@reqres.in"
-    }    
+    },
+    "api_user_payload": {
+        "name": "navneet_shree",
+        "job": "sdet",
+        "email": "navneet_sdet@example.com",
+        "skills": [
+            "Java",
+            "Playwright",
+            "API Testing"
+        ],
+        "address": {
+            "street": "123 Pune Main raod",
+            "city": "Pune",
+            "state": "Maharashtra",
+            "zip": "411007"
+        }
+    },
+    "api_multi_users": [
+        {
+            "name": "navneet_shree",
+            "job": "sdet",
+            "email": "navneet_sdet@example.com",
+            "skills": [
+                "Java",
+                "Playwright",
+                "API Testing"
+            ],
+            "address": {
+                "street": "123 Pune Main raod",
+                "city": "Pune",
+                "state": "Maharashtra",
+                "zip": "411007"
+            }
+        },
+        {
+            "name": "john_doe",
+            "job": "qa_engineer",
+            "email": "john@example.com",
+            "skills": [
+                "Selenium",
+                "Python"
+            ],
+            "address": {
+                "street": "456 Mumbai Road",
+                "city": "Mumbai",
+                "state": "Maharashtra",
+                "zip": "400001"
+            }
+        }
+    ]
 }

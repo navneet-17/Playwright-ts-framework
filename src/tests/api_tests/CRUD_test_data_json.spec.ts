@@ -1,6 +1,7 @@
 import { test, expect} from '@playwright/test';
 import { CustomLogger } from '../../loggers/CustomLogger';
 import { getJsonObject } from '../../utils/TestDataReader';
+import { ApiConfig } from "../../config/ApiConfig";
 import * as dotenv from 'dotenv';
 // ✅ Load .env file
 dotenv.config();
@@ -11,29 +12,28 @@ if (!API_KEY) {
   throw new Error('API_KEY not found in .env file');
 }
 // ✅ Fetch, destructure test data and define the constants for API testing
-const apiTestData = getJsonObject('api_test_data');
-const endpoint = apiTestData.endpoint;
-const baseUrl = endpoint.split('?')[0];  // Remove query params
-const createUserPayload = apiTestData.create_user_payload;
-const oldUserEmail = createUserPayload.email; 
-const updateUserEmail = apiTestData.update_user_email;
 const headers = {
   'content-type': 'application/json',
   'x-api-key': API_KEY 
 };
+const endpoint = ApiConfig.API_ENDPOINT;
+const createUserPayload = getJsonObject("api_test_data");
+console.log('createUserPayload : ' + JSON.stringify(createUserPayload));
+const oldUserEmail = "navneet.shree@reqres.in";
+const updateUserEmail = "navneet_shree@reqres.in";
 
 test.describe('CRUD API Tests using test data.json file', () => {
   test('GET users API Test @smoke @regression', async  ({request}) => {
     logger.info(`Fetching endpoint: ${endpoint}`);
-    const response = await request.get(endpoint, {headers});
+    const response = await request.get(`${endpoint}`, {headers});
     const responseStatus = response.status();
     expect(responseStatus).toBe(200);
     logger.success('GET API Request Passed with status code 200');
   });
 
   test('POST create user API Test @smoke @regression', async ({request}) => {
-    logger.info(`POST ${baseUrl} with payload: \n ${JSON.stringify(createUserPayload)}`);
-    const response = await request.post(baseUrl, {headers, data: createUserPayload});
+    logger.info(`POST ${endpoint} with payload: \n ${JSON.stringify(createUserPayload)}`);
+    const response = await request.post(`${endpoint}`, {headers, data: createUserPayload});
     const responseStatus = response.status();
     expect(responseStatus).toBe(201);
     logger.success('POST API Request Passed with status code 201');
@@ -44,7 +44,7 @@ test.describe('CRUD API Tests using test data.json file', () => {
 
   test('PUT update user API Test @smoke @regression', async({request}) =>{
     const userIdToUpdate = 1; // Assuming we want to update user with id 1
-    const updateEndpoint = `${baseUrl}/${userIdToUpdate}`;
+    const updateEndpoint = `${endpoint}/${userIdToUpdate}`;
     logger.info('updateEndpoint : ' + updateEndpoint);
     logger.info ("Updating useremail with id: " + userIdToUpdate +
        " from existing email: '" + oldUserEmail + "' to new email: '" + updateUserEmail + "'");
@@ -62,7 +62,7 @@ test.describe('CRUD API Tests using test data.json file', () => {
 
   test('DELETE user API Test @smoke @regression', async({request}) =>{
     const userIdToDelete = 1;
-    const deleteEndpoint = `${baseUrl}/${userIdToDelete}`;
+    const deleteEndpoint = `${endpoint}/${userIdToDelete}`;
     logger.info('deleteEndpoint : ' + deleteEndpoint);
     logger.info('Deleting user with id: ' + userIdToDelete);
     const response = await request.delete(deleteEndpoint, {headers});
@@ -72,8 +72,3 @@ test.describe('CRUD API Tests using test data.json file', () => {
       'User with id ' + userIdToDelete + ' was deleted successfully');    
   })
 })
-
-
-// Things implemented in this test:
-/*  
-*/

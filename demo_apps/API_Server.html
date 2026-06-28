@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Users List</title>
+    <style>
+      /* Basic styling for a clear table */
+      table {
+        width: 50%;
+        border-collapse: collapse;
+        font-family: sans-serif;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Users List</h1>
+
+    <table id="users-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Profile</th>
+          <th>Skills</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody id="users-table-body"></tbody>
+    </table>
+
+    <script>
+      async function loadUsers() {
+        try {
+          const res = await fetch("http://localhost:3000/users");
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          const users = await res.json();
+
+          const tableBody = document.getElementById("users-table-body");
+
+          // Clear existing rows
+          tableBody.innerHTML = "";
+
+          // Loop through users and create a table row for each
+          users.forEach((user) => {
+            // Create a new row
+            const tr = document.createElement("tr");
+
+            // 1. Create Name cell
+            const tdName = document.createElement("td");
+            tdName.textContent = user.name || "N/A"; // Use default if data is missing
+            tr.appendChild(tdName);
+
+            // 2. Create Profile cell
+            const tdProfile = document.createElement("td");
+            tdProfile.textContent = user.profile || "N/A"; // Assumes 'user.profile'
+            tr.appendChild(tdProfile);
+
+            // 3. Create Skills cell
+            const tdSkills = document.createElement("td");
+            tdSkills.textContent = user.skills || "N/A"; // Assumes 'user.skills'
+            tr.appendChild(tdSkills);
+
+            // 4. Create Location cell
+            const tdLocation = document.createElement("td");
+            tdLocation.textContent = user.location || "N/A"; // Assumes 'user.location'
+            tr.appendChild(tdLocation);
+
+            // Add the new row to the table body
+            tableBody.appendChild(tr);
+          });
+        } catch (error) {
+          console.error("Failed to load users:", error);
+          const tableBody = document.getElementById("users-table-body");
+          tableBody.innerHTML =
+            '<tr><td colspan="4">Error loading users.</td></tr>';
+        }
+      }
+
+      // Load the users when the page is opened
+      loadUsers();
+    </script>
+  </body>
+</html>

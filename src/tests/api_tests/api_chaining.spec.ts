@@ -52,6 +52,5 @@ test.describe('VALIDATING API CHAINING', () => {
     expect(response.status()).toBe(204);
     logger.success('DELETE API Request Passed with status code 204 \n ' +   
       'User with id ' + userId + ' was deleted successfully');    
-
     })
 })

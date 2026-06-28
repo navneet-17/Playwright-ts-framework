@@ -1,5 +1,14 @@
-export function convertToISTTime(datePassed?: Date): string  {
-  const date = datePassed || new Date();
+export function convertToISTTime(datePassed?: Date | string): string  {
+  // ✅ Handle both Date objects and ISO strings
+  let date: Date;
+  
+  if (!datePassed) {
+    date = new Date();
+  } else if (typeof datePassed === 'string') {
+    date = new Date(datePassed);  // Parse ISO string to Date
+  } else {
+    date = datePassed;  // Already a Date object
+  }
 
   const dd = String(date.getDate()).padStart(2, '0');
   const mm = String(date.getMonth() + 1).padStart(2, '0'); 

@@ -9,6 +9,7 @@ blob-report/
 playwright/.cache/
 /playwright/.auth/
 test-results/
+src/screenshots/
 .vscode/
 .env
 .env.local
